@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+# prueba de branch
 
 INSTALLED_APPS = [
     'django.contrib.admin',
