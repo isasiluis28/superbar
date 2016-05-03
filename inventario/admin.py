@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import Insumo, InsumoTamano, Lote, Bandeja, BandejaInsumo, Produccion, ProduccionBandeja, FacturaCompraProduccion
+from models import Insumo, InsumoTamano, Lote, Bandeja, BandejaInsumo, Produccion, BandejaEnProduccion, FacturaCompraProduccion
 from forms import InsumoForm, LoteForm, FacturaCompraProduccionForm, \
     ProduccionBandejaForm, InsumoTamanoForm, ProduccionForm
 from ajax_select.admin import AjaxSelectAdmin
@@ -51,12 +51,13 @@ admin.site.register(Bandeja, BandejaAdmin)
 
 
 class ProduccionBandejaInline(admin.StackedInline):
-    model = ProduccionBandeja
+    model = BandejaEnProduccion
     form = ProduccionBandejaForm
     extra = 3
 
 
 class ProduccionAdmin(admin.ModelAdmin):
+    list_display = ('fecha', 'costo_total')
     form = ProduccionForm
     inlines = [ProduccionBandejaInline,]
 

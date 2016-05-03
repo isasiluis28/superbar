@@ -1,13 +1,14 @@
 from django import forms
 from django.forms.models import BaseInlineFormSet
 
-from models import Insumo, Lote, FacturaCompraProduccion, ProduccionBandeja, InsumoTamano, Produccion
+from inventario.models import BandejaEnProduccion
+from models import Insumo, Lote, FacturaCompraProduccion, InsumoTamano, Produccion
 from ajax_select.fields import AutoCompleteSelectField
 
 
 class ProduccionBandejaForm(forms.ModelForm):
     class Meta:
-        model = ProduccionBandeja
+        model = BandejaEnProduccion
         fields = ('bandeja', 'nro_lote', 'cant_bandejas', 'cant_perdida',)
 
     def clean(self):

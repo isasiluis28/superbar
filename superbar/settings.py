@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'ajax_select',
     'clientes',
     'facturas',
-    # 'inventario',
+    'inventario',
     'daterange_filter',
     'reportes',
     "control",
