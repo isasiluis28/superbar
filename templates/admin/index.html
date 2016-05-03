@@ -1,0 +1,89 @@
+{% extends "admin/index.html" %}
+{#{% extends "admin/base_site.html" %}#}
+{% load i18n static %}
+
+{% block content %}
+<div id="content-main">
+
+{% if app_list %}
+    {% for app in app_list %}
+        <div class="app-{{ app.app_label }} module">
+        <table>
+        <caption>
+            <a href="{{ app.app_url }}" class="section" title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">{{ app.name }}</a>
+        </caption>
+        {% for model in app.models %}
+            <tr class="model-{{ model.object_name|lower }}">
+            {% if model.admin_url %}
+                <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
+            {% else %}
+                <th scope="row">{{ model.name }}</th>
+            {% endif %}
+
+            {% if model.add_url %}
+                <td><a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>
+            {% else %}
+                <td>&nbsp;</td>
+            {% endif %}
+
+            {% if model.admin_url %}
+                <td><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a></td>
+            {% else %}
+                <td>&nbsp;</td>
+            {% endif %}
+            </tr>
+        {% endfor %}
+
+        </table>
+        </div>
+    {% endfor %}
+    <div class="module">
+    <table>
+        <caption>
+            <a href="#" class="section" title="Reportes">Reportes</a>
+        </caption>
+        <tr>
+            <th><a href="/reportes/vendedor">Reporte de Vendedor</a></th>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th><a href="/reportes/ventas">Reporte de Ventas</a></th>
+            <td></td>
+            <td></td>
+        </tr>
+	<tr>
+            <th><a href="/reportes/compras">Reporte de Compras</a></th>
+            <td></td>
+            <td></td>
+        </tr>
+	<tr>
+            <th><a href="/reportes/clientesPorCobrar">Reporte de Clientes a cobrar</a></th>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+             <th><a href="/reportes/informeGeneral">Reporte General</a></th>
+             <td></td>
+             <td></td>
+        </tr>
+    </table>
+    </div>
+{% else %}
+    <p>{% trans "You don't have permission to edit anything." %}</p>
+{% endif %}
+</div>
+{% endblock %}
+
+
+{#{% block content %}#}
+{#    {{ block.super }}#}
+{##}
+{#    <div>#}
+{#        <h1>Reportes</h1>#}
+{#        <p style="border: ridge #0000FF 1px; background-color: #7CA0C7">Reportes</p>#}
+{#        <a href="/reportes/vendedor">Reporte de Vendedor</a></br>#}
+{#        <a href="/reportes/ventas">Reporte de Ventas</a></br>#}
+{#        <a href="/reportes/compras">Reporte de Compras</a>#}
+{#    </div>#}
+{#{% endblock %}#}

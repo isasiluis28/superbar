@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reportes</title>
+</head>
+<body>
+<h1>Parámetros</h1>
+{% block contenido %}
+        <form id='formulario' method='post' action=''>{% csrf_token %}
+            {{ formulario.as_p }}
+            <button type="submit" class="save btn btn-default">Generar Reporte</button>
+        </form>
+{% endblock %}
+</h1>
+</body>
+</html>
