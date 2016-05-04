@@ -389,7 +389,7 @@ def reporte_vendedor(vendedor, fecha_inicio, fecha_fin):
                 comision_calculada = int(f.monto_total * 0.17)
                 descripcion = "V & E"
         elif f.cliente.vendedor.usuario.username == "superbar" and f.delivery.usuario.username == "alejandro":
-            comision_calculada = int(f.monto_total * 0.14)
+            comision_calculada = int(f.monto_total * 0.15)
             descripcion = "E"
             # print f.cliente.nombre
 

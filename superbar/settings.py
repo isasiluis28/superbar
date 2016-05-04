@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+# prueba de branch
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -40,7 +41,7 @@ INSTALLED_APPS = [
     'ajax_select',
     'clientes',
     'facturas',
-    # 'inventario',
+    'inventario',
     'daterange_filter',
     'reportes',
     "control",

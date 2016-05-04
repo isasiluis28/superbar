@@ -130,10 +130,6 @@ class FacturaVenta(models.Model):
         if self.tipo_factura is 2:
             self.cancelado = False
 
-    # def get_date(self):
-    #     my_date = datetime.strptime(self.fecha_factura, '%Y-%m-%d %H:%M:%S')
-    #     return my_date.date()
-
     def __unicode__(self):
         return u'Nro. Factura: %s, Cliente: %s, Fecha: %s' % (self.nro_factura, self.cliente, self.fecha_factura)
 
@@ -191,7 +187,6 @@ class FacturaAnulada(models.Model):
     monto_total = models.IntegerField(default=0, verbose_name='Monto')
     vendedor = models.ForeignKey('clientes.Vendedor', null=True,help_text='Vendedor al cual pertenece la factura anulada.')
     fecha_creacion = models.DateTimeField(default=timezone.now)
-
 
     def __unicode__(self):
         return u'Nro. Factura: %s, Cliente: %s, Fecha: %s' % (self.nro_factura, self.cliente, self.fecha_factura)
