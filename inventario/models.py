@@ -127,7 +127,7 @@ class BandejaEnProduccion(models.Model):
         for bandejainsumo in self.bandeja.bandejainsumo_set.all():
             insumo = bandejainsumo.insumo
             cantidad_total = bandejainsumo.cantidad * self.cant_bandejas
-            lote_list = Lote.objects.filter(insumo_tamano__insumo=insumo).order_by('-fecha_vto').exclude(saldo=0)
+            lote_list = Lote.objects.filter(insumo_tamano__insumo=insumo).order_by('fecha_vto').exclude(saldo=0)
             for lote in lote_list:
                 if lote.saldo > cantidad_total:
                     self.costo_bandeja += cantidad_total * (lote.costo/lote.insumo_tamano.cantidad)
@@ -147,70 +147,3 @@ class BandejaEnProduccion(models.Model):
 
     class Meta:
         unique_together = ('produccion', 'bandeja')
-
-
-# class Produccion(models.Model):
-#     class Meta:
-#         verbose_name = 'Produccion'
-#         verbose_name_plural = 'Producciones'
-#
-#     fecha = models.DateField(default=timezone.now)
-#     bandejas = models.ManyToManyField(Bandeja, through='ProduccionBandeja')
-#     costo_produccion = models.FloatField(default=0.0)
-
-
-# ESTIV SRL
-# class ProduccionBandeja(models.Model):
-#     class Meta:
-#         verbose_name_plural = 'Bandejas de Produccion'
-#         verbose_name = 'Bandeja de Produccion'
-#         unique_together = ('produccion', 'bandeja',)
-#
-#     produccion = models.ForeignKey(Produccion)
-#     bandeja = models.ForeignKey(Bandeja, help_text='Tipo de bandeja utilizada.')
-#     nro_lote = models.CharField(max_length=50, help_text='lote de produccion', verbose_name='Nro. de lote', unique=True)
-#
-#     cant_bandejas = models.FloatField(verbose_name='Cantidad de bandejas')  # cantidad de bandejas hechas
-#     cant_perdida = models.IntegerField(help_text='cantidad de barritas perdidas del tipo de bandeja', default=0,
-#                                        verbose_name='Cantidad Perdida')
-#     costo_bandeja = models.FloatField(default=0.0)
-#
-#     def save(self, *args, **kwargs):
-#         if self.pk:
-#             self.produccion.costo_produccion += self.costo_bandeja
-#             self.produccion.save()
-#         else:
-#             super(ProduccionBandeja, self).save(*args, **kwargs)
-#
-#
-# class LoteEnProduccion(models.Model):
-#     # loteusado = models.ForeignKey(LoteUsado)
-#     class Meta:
-#         unique_together = ('produccionbandeja', 'insumo')
-#
-#     produccionbandeja = models.ForeignKey(ProduccionBandeja)
-#
-#     insumo = models.ForeignKey(Insumo)
-#
-#     costo_insumo = models.FloatField(default=0.0)
-#
-#     lotes = models.ManyToManyField(Lote, through='LotesInsumo')
-#
-#     def save(self, *args, **kwargs):
-#         if self.pk:
-#             self.produccionbandeja.costo_bandeja += self.costo_insumo
-#             self.produccionbandeja.save()
-#         else:
-#             super(LoteEnProduccion, self).save(*args, **kwargs)
-#
-#
-# class LotesInsumo(models.Model):
-#     loteenproduccion = models.ForeignKey(LoteEnProduccion)
-#     lote = models.ForeignKey(Lote)
-#
-#     cantidad = models.FloatField()  # cantidad de gramos utilizados del lote seleccionado
-#
-#     def save(self, *args, **kwargs):
-#         super(LotesInsumo, self).save(*args, **kwargs)
-#         self.loteenproduccion.costo_insumo += (self.lote.costo / self.lote.insumo_tamano.cantidad) * self.cantidad
-#         self.loteenproduccion.save()
