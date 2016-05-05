@@ -28,6 +28,7 @@ class InsumoTamano(models.Model):
         (2, 'Mediano'),
         (3, 'Grande'),
         (4, 'Unitario'),
+        (5, 'Inicial')
     )
     insumo = models.ForeignKey(Insumo)
     tamano = models.IntegerField(choices=TAMANOS)
