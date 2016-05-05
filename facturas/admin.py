@@ -162,7 +162,7 @@ class FacturaVentaAdmin(AjaxSelectAdmin):
     list_display = ('fecha_factura', 'nro_factura', 'cliente', 'total_vendido', 'monto_total', 'saldo', 'cancelado',)
     total_functions = {'total_vendido': sum, 'monto_total': sum, 'saldo': sum}
     change_list_template = 'admin/facturas/changelist_admin.html'
-    search_fields = ('nro_factura', 'cliente__nombre',)
+    search_fields = ('nro_factura', 'cliente__nombre', 'cliente__ruc')
     ordering = ('-fecha_factura', '-nro_factura',)
     list_filter = (
         ('fecha_factura', DateRangeFilter),
